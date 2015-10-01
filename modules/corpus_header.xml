@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?><?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
-<teiHeader xml:lang="en">
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <teiHeader xml:lang="en">
         <fileDesc>
             <titleStmt>
-                <title>WSC term data in TEI</title>
+                <title>WSC data in TEI</title>
                 <principal>Joachim Kurtz</principal>
                 <respStmt>
                     <resp>xml modeling</resp>
@@ -15,13 +16,21 @@
                     <resp>TEI markup</resp>
                     <persName>Duncan Paterson</persName>
                 </respStmt>
+                <respStmt>
+                    <resp>NER data proofing</resp>
+                    <persName>Hong Liang</persName>
+                    <persName>Lee Kyonghee</persName>
+                    <persName>Qiu Zhiqiong</persName>
+                </respStmt>
             </titleStmt>
             <publicationStmt>
                 <distributor>Cluster of Excellence Asia and Europe in a Global Context</distributor>
-                <availability><p>Yet unpublished data</p></availability>
+                <availability>
+                    <p>available  via <ref target="https://heidata.uni-heidelberg.de"/></p> <!--this is not the final link-->
+                </availability>
             </publicationStmt>
             <sourceDesc>
-                <p>Extract of term data from Filemaker database, Mar 13 2015</p>
+                <p>Exported from FileMaker database March - August 2015</p>
                 <p>born digital</p>
             </sourceDesc>
         </fileDesc>
@@ -49,14 +58,9 @@
                     <bibl>Library of Congress Subject Headings</bibl>
                 </taxonomy>
             </classDecl>
-            <editorialDecl>
-                <p>Translation and tranliteration for each entry come from the print sources. If the sources ommit either one, project members supplied them inside brackets "()".</p>
-                <p>Comments on ambigous tranliterations appear inside a note element.</p>
-                <p>"□" as placeholder for illegible or unkown characters is a direct transcription from the source database.</p>
-            </editorialDecl>
             <listPrefixDef>
-                <prefixDef ident="uuid" xml:base="http://kjc-sv016.kjc.uni-heidelberg.de:8080/exist/apps/wsc/data/" matchPattern="(.*)" replacementPattern="($1)">
-                    <p>Directs source links to www.tamboti.uni-hd.de</p>
+                <prefixDef ident="uuid" xml:base="http://kjc-sv016.kjc.uni-heidelberg.de:8080/exist/apps/wsc/data/" matchPattern="(.*)" replacementPattern="($1)"> <!--does this work now?-->
+                    <p>Stable links from www.tamboti.uni-hd.de</p>
                 </prefixDef>
             </listPrefixDef>            
             <projectDesc>
@@ -69,7 +73,7 @@
                 <language ident="zh-Hant">chinese traditional characters</language>
                 <language ident="zh-Latn-alalc97">romanization of chinese characters according to ALA-LC recommendation</language>
                 <language ident="zh-Latn-PRC-pinyin">pinyin transliteration of chinese characters according to national standard of PRC, gb/t 16159-2012</language>
-                <language ident="de">german (or other where language was not marked in source)</language>
+                <language ident="de">german</language>
                 <language ident="ja">japanese</language>
             </langUsage>
             <textClass>
@@ -305,40 +309,11 @@
                 </keywords>
             </textClass>
         </profileDesc>
-        <revisionDesc>
-            <change when="2015-03-29" who="DP">markup</change>
-            <change when="2015-06-10" who="KMW">inital export</change>
+        <revisionDesc> <!--new releases from github should be written here-->
+            <change when="2015-06-28" who="DP">1.0</change>
         </revisionDesc>
     </teiHeader>
-    <text>
-        <body>
-            <entry> <!-- @n This needs to be the Worddb id number?-->
-                <form>
-                    <orth type="zh-hant">察病□</orth> <!--see github #28 we have 580 unkown characters which need <g/> tags  -->
-                    <pron notation="zh-Latn-alalc97">cha bing wang</pron> <!--see  #35, also #52 for (term) -->
-                    <pron notation="zh-Latn-PRC-pinyin">chá bìng wang</pron> 
-                </form>
-                <sense n="Sam117181"> <!--@n I think this is a more consistent use of sampledb-id-->
-                    <cit type="translation" xml:lang="en"> <!--see github #36  -->
-                        <quote>pathological anatomy</quote>
-                    </cit>
-                    <usg type="hint"> <!--see github #27-->
-                        <gloss target="#USE #new"/>
-                    </usg>
-                    <usg type="dom">
-                        <gloss type="#LCSH" target="#sh00006614"/> <!--now with better xml/tei-->
-                        <gloss type="#LCSH" target="#sh99005065 #sh85118582"/>
-                    </usg>                   
-                    <xr type="source">
-                        <lbl>source</lbl>
-                        <bibl n="Bib0000"> <!--@n I think this is the best place for bibid using -->
-                        <!--<date/>  if date is not identical to bioID item, otherwise use date from sampleID  -->
-                            <ref target="uuid:d479cc43-fd7a-4fc0-b4a3-e50fe7256180"/> <!--we should avoid relative paths here, and put some refscheme in the header leavin only uuid in the records. See git #42-->
-                            <citedRange unit="pp">1009</citedRange>
-                        </bibl>
-                    </xr>
-                </sense>
-            </entry>
-        </body>
-    </text>
-</TEI>
+    <xi:include href="termdb/term_header.xml" parse="xml"/>
+    <xi:include href="biodb/bio_header.xml" parse="xml"/>   
+</teiCorpus>
+    
