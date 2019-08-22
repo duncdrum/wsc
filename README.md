@@ -9,15 +9,15 @@ related databases linked to the bibliography, which will be prepared for online 
 involved in diverse instances of distribution, adaptation and appropriation of knowledge from Euro-America and Japan in late Qing and early Republican China.
 
 ### Developing
-WSC runs in [eXist-db 4.4.0+] (https://github.com/eXist-db/exist)
-WSC consists of an application and a separate data package. 
+WSC runs in [eXist-db 4.4.0+](https://github.com/eXist-db/exist)
+WSC consists of an application and a separate data package.
 
 ### Building with maven
-Run "mv clean package".
+Run `mvn clean package`
 
 You can install the app in eXist by selecting this file via Package manager > Add a package in eXist.
 
-The data package by default resides in 
+The data package by default resides in
 ````
 /db/data/commons/WSC
 ````
